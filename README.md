@@ -1,0 +1,1 @@
+https://tanebijs.github.io/onebot-ency/
