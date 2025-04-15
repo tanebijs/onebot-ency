@@ -8,7 +8,11 @@ API 是 OneBot 向用户提供的操作接口，用户可通过 HTTP 请求或 W
 
 对于不同的数据类型和传入方式，协议端需要进行相应的解析和处理。特别是对于 **urlencoded 格式**的传入数据，由于 urlencoded 只支持字符串一种类型，但 API 接收的基本数据类型却有很多种，因此协议端需要将字符串解析为对应的基本数据类型，例如，当 action 接受数字类型时，需要将字符串解析为数字再传入。此外，urlencoded 是平面化的，无法传递嵌套的对象和数组，因此对于需要接收复杂数据类型的 API，urlencoded 无能为力，只能使用 JSON 格式传递参数。
 
-此外，OneBot 11 标准对于布尔值的规定也不清晰。我们可以看到，在[公开 API 页面](https://github.com/botuniverse/onebot-11/blob/master/api/public.md)，布尔值是用 `true` 和 `false` 来表示的；而在[消息段类型页面](https://github.com/botuniverse/onebot-11/blob/master/message/segment.md)，则用 `0` 和 `1` 来表示布尔值。基于此，我们建议协议端实现者同时接受 `true` 和 `false` 以及 `0` 和 `1` 以及对应的字符串字面量 `"true"` `"false` `"0"` `"1"` 来表示布尔值，以提高兼容性。
+此外，OneBot 11 标准对于布尔值的规定也不清晰。我们可以看到，在[公开 API 页面](https://github.com/botuniverse/onebot-11/blob/master/api/public.md)，布尔值是用 `true` 和 `false` 来表示的；而在[消息段类型页面](https://github.com/botuniverse/onebot-11/blob/master/message/segment.md)，则用 `0` 和 `1` 来表示布尔值。
+
+::: details 最佳实践
+基于此，笔者建议协议端实现者同时接受 `true` 和 `false` 以及 `0` 和 `1` 以及对应的字符串字面量 `"true"` `"false` `"0"` `"1"` 来表示布尔值，以提高兼容性。
+:::
 
 ## 响应
 
@@ -24,7 +28,11 @@ API 是 OneBot 向用户提供的操作接口，用户可通过 HTTP 请求或 W
 - `data` (object)：处理结果，只会在 `status` 为 `ok` 时返回。
 - `message` (string)：错误信息，只会在 `status` 为 `failed` 时返回。
 
-OneBot 11 建议 `message` 字段只包含有关错误的简要信息，具体错误信息应当查阅日志。而 go-cqhttp 则额外包含 `wording` 字段，内容是用中文描述的详细错误信息。我们建议协议端实现者在 `message` 字段中包含简要的错误信息，并同时在日志和 `wording` 字段中包含详细的错误信息，以便用户调试。
+OneBot 11 建议 `message` 字段只包含有关错误的简要信息，具体错误信息应当查阅日志。而 go-cqhttp 则额外包含 `wording` 字段，内容是用中文描述的详细错误信息。
+
+::: details 夹私货
+笔者建议协议端实现者在 `message` 字段中包含简要的错误信息，并同时在日志和 `wording` 字段中包含详细的错误信息，以便用户调试。
+:::
 
 ## 异步调用
 
