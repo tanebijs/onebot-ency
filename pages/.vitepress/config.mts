@@ -28,5 +28,5 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/tanebijs/onebot-ency' }
     ]
   },
-  base: "/onebot-ency/"
+  base: "/onebot-pedia/"
 })
