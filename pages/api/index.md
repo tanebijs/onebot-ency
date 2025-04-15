@@ -26,11 +26,10 @@ API 是 OneBot 向用户提供的操作接口，用户可通过 HTTP 请求或 W
   - `1`：表示异步处理，只会在 `status` 为 `async` 时返回；
   - 其余值：表示处理失败，只会在 `status` 为 `failed` 时返回，含义由协议端实现者自行定义。
 - `data` (object)：处理结果，只会在 `status` 为 `ok` 时返回。
+
+go-cqhttp 额外包含两个仅限于处理失败时的字段：
 - `message` (string)：错误信息，只会在 `status` 为 `failed` 时返回。
-
-OneBot 11 建议 `message` 字段只包含有关错误的简要信息，具体错误信息应当查阅日志。
-
-go-cqhttp 额外包含 `wording` 字段，内容是用中文描述的详细错误信息。
+- `wording` (string)：用中文描述的详细错误信息。go-cqhttp 建议 `message` 字段只包含有关错误的简要信息，具体错误信息应当查阅日志。
 
 Lagrange.OneBot 在个别 ([#1](https://github.com/LagrangeDev/Lagrange.Core/blob/2ab0c9213fd9ca7155ba5b88376160832bbaa977/Lagrange.OneBot/Core/Operation/Generic/SendLikeOperation.cs#L19), [#2](https://github.com/LagrangeDev/Lagrange.Core/blob/2ab0c9213fd9ca7155ba5b88376160832bbaa977/Lagrange.OneBot/Core/Operation/Group/SetGroupPortraitOperation.cs#L24)) 接口中，返回的 `status` 并不是 `ok`、`failed` 或 `async` 其一，而是其他的自定义值乃至错误消息。
 
