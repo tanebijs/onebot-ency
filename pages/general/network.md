@@ -11,9 +11,18 @@
 
 ## HTTP
 
-OneBot 在启动时开启一个 HTTP 服务器，监听配置文件指定的 IP 和端口，接受路径为 `/:action` 的 API 请求，请求可以使用 GET 或 POST 方法，可以通过 query 参数、urlencoded 表单或 JSON 传递参数。参数可能有不同的类型，当用户通过 query 参数或 urlencoded 表单传参，或在 JSON 中使用字符串作为参数值时，协议规定 OneBot 实现需要从字符串解析出对应类型的数据。
+OneBot 在启动时开启一个 HTTP 服务器，监听配置文件指定的 IP 和端口，接受路径为 `/:action` 的 API 请求，请求可以使用 GET 或 POST 方法，可以通过 query 参数、urlencoded 表单或 JSON 传递参数。实际使用中，用户通常选择 POST 方法传递 JSON 格式的参数，在调试环境下有时也使用 GET 方法传递 query 参数。而协议端实现中，开发者也很少考虑 POST urlencoded 表单的情况（例如 NapCatQQ 就没有处理这种情况）。
 
-实际使用中，用户通常选择 POST 方法传递 JSON 格式的参数，在调试环境下有时也使用 GET 方法传递 query 参数。而协议端实现中，开发者也很少考虑 POST urlencoded 表单的情况（例如 NapCatQQ 就没有处理这种情况），更没有考虑过 urlencoded 和 JSON 嵌套的情况。
+参数可能有不同的类型，当用户通过 query 参数或 urlencoded 表单传参，或在 JSON 中使用字符串作为参数值时，协议规定 OneBot 实现需要从字符串解析出对应类型的数据，例如，如果 urlencoded 表单中的某个字段符合 JSON 格式，则需要将其解析为 JSON 对象，这对于协议端来说是巨大的挑战，因此几乎没有协议端考虑过这种情况。
+
+收到 API 请求并处理后，OneBot 会返回一个 HTTP 响应，根据具体错误类型不同，HTTP 状态码不同：
+- `401`：鉴权凭据未提供。
+- `403`：鉴权凭据不匹配。
+- `406`：POST 请求的 Content-Type 不支持。
+- `400`：参数格式不正确。
+- `404`：请求的 Action 不存在。
+
+剩下的所有情况，无论操作实际成功与否，状态码都是 200 (OK)，同时返回 JSON 格式的响应，具体格式见 [API 页面](/api/#响应)。
 
 ## HTTP POST
 
@@ -37,7 +46,11 @@ OneBot 在启动时开启一个 WebSocket 服务器，监听配置文件指定�
   | params | object | 要调用的 Action 的参数，包含不同字段                      |
   | echo   | string | 可选，用于区分不同调用，用户可以自定义，OneBot 会原样返回 |
 
-  返回格式与 Action 的返回格式相近，多出了 `echo` 字段，内容是请求中传入的 `echo` 字段。
+  返回格式与 [HTTP](#http) 的 200 返回格式相近，多出了 `echo` 字段，内容是请求中传入的 `echo` 字段。
+
+  此外，由于 WebSocket 的返回数据并不包含 HTTP 状态码，因此 OneBot 需要用 `retcode` 字段来表示一些特定的错误类型：
+  - `1400`：表示请求参数错误；
+  - `1404`：表示请求的 Action 不存在。
 
 - `/event`：只用于主动推送事件，格式同事件格式。
 
