@@ -28,7 +28,11 @@ API 是 OneBot 向用户提供的操作接口，用户可通过 HTTP 请求或 W
 - `data` (object)：处理结果，只会在 `status` 为 `ok` 时返回。
 - `message` (string)：错误信息，只会在 `status` 为 `failed` 时返回。
 
-OneBot 11 建议 `message` 字段只包含有关错误的简要信息，具体错误信息应当查阅日志。而 go-cqhttp 则额外包含 `wording` 字段，内容是用中文描述的详细错误信息。
+OneBot 11 建议 `message` 字段只包含有关错误的简要信息，具体错误信息应当查阅日志。
+
+go-cqhttp 额外包含 `wording` 字段，内容是用中文描述的详细错误信息。
+
+Lagrange.OneBot 在个别 ([#1](https://github.com/LagrangeDev/Lagrange.Core/blob/2ab0c9213fd9ca7155ba5b88376160832bbaa977/Lagrange.OneBot/Core/Operation/Generic/SendLikeOperation.cs#L19), [#2](https://github.com/LagrangeDev/Lagrange.Core/blob/2ab0c9213fd9ca7155ba5b88376160832bbaa977/Lagrange.OneBot/Core/Operation/Group/SetGroupPortraitOperation.cs#L24)) 接口中，返回的 `status` 并不是 `ok`、`failed` 或 `async` 其一，而是其他的自定义值乃至错误消息。
 
 ::: details 最佳实践
 笔者建议协议端实现者在 `message` 字段中包含简要的错误信息，并同时在日志和 `wording` 字段中包含详细的错误信息，以便用户调试。
