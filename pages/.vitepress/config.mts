@@ -18,7 +18,8 @@ export default defineConfig({
         text: 'API',
         link: '/api/',
         items: [
-          { text: '分类标准', link: '/api/classify' }
+          { text: '分类标准', link: '/api/classify' },
+          { text: '消息 API', link: '/api/message' },
         ]
       },
     ],
