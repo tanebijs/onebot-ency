@@ -12,7 +12,7 @@ hero:
       link: /general
     - theme: alt
       text: GitHub
-      link: https://github.com/tanebijs/onebot-ency
+      link: https://github.com/tanebijs/onebot-pedia
 features:
   - title: 兼容并包
     details: GoCQ？拉格兰？瞌睡猫？LLOB？你想要的这都有

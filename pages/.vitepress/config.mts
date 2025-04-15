@@ -25,7 +25,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/tanebijs/onebot-ency' }
+      { icon: 'github', link: 'https://github.com/tanebijs/onebot-pedia' }
     ]
   },
   base: "/onebot-pedia/"
