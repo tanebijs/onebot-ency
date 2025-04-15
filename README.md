@@ -1,1 +1,1 @@
-https://tanebijs.github.io/onebot-ency/
+https://tanebijs.github.io/onebot-pedia/
