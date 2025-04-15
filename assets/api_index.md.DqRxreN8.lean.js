@@ -1,0 +1,1 @@
+import{_ as o,c as a,o as d,ae as c}from"./chunks/framework.CnuuZLM2.js";const g=JSON.parse('{"title":"API","description":"","frontmatter":{},"headers":[],"relativePath":"api/index.md","filePath":"api/index.md"}'),t={name:"api/index.md"};function r(s,e,n,i,l,p){return d(),a("div",null,e[0]||(e[0]=[c("",23)]))}const _=o(t,[["render",r]]);export{g as __pageData,_ as default};
