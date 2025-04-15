@@ -21,6 +21,7 @@ export default defineConfig({
       } */
       { text: '总序', link: '/general/' },
       { text: '通信', link: '/general/network' },
+      { text: 'API', link: '/api/' },
     ],
 
     socialLinks: [
