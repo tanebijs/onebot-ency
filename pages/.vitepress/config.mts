@@ -19,6 +19,8 @@ export default defineConfig({
           { text: 'Runtime API Examples', link: '/api-examples' }
         ]
       } */
+      { text: '总序', link: '/general/' },
+      { text: '通信', link: '/general/network' },
     ],
 
     socialLinks: [
