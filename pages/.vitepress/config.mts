@@ -12,16 +12,15 @@ export default defineConfig({
     ],
 
     sidebar: [
-      /* {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      } */
       { text: '总序', link: '/general/' },
       { text: '通信', link: '/general/network' },
-      { text: 'API', link: '/api/' },
+      {
+        text: 'API',
+        link: '/api/',
+        items: [
+          { text: '分类标准', link: '/api/classify' }
+        ]
+      },
     ],
 
     socialLinks: [
