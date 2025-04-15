@@ -1,0 +1,1 @@
+import{_ as t,c as a,o,ae as r}from"./chunks/framework.CgMrDesg.js";const d=JSON.parse('{"title":"总序","description":"","frontmatter":{},"headers":[],"relativePath":"general/index.md","filePath":"general/index.md"}'),n={name:"general/index.md"};function p(s,e,l,i,h,c){return o(),a("div",null,e[0]||(e[0]=[r("",19)]))}const g=t(n,[["render",p]]);export{d as __pageData,g as default};
