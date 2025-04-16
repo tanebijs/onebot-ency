@@ -22,6 +22,7 @@ export default defineConfig({
           { text: '消息 API', link: '/api/message' },
         ]
       },
+      { text: '消息', link: '/message/' }
     ],
 
     socialLinks: [
