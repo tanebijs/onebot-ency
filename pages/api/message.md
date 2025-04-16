@@ -128,3 +128,83 @@ OneBot 11 标准制定时 “真实” ID 的原本含义已经不得而知，�
 - Lagrange.OneBot ([Payload](https://github.com/LagrangeDev/Lagrange.Core/blob/master/Lagrange.OneBot/Core/Entity/Action/OneBotGetForwardMsg.cs), [Response](https://github.com/LagrangeDev/Lagrange.Core/blob/master/Lagrange.OneBot/Core/Entity/Action/OneBotGetForwardMsg.cs)) 的实现与 OneBot 11 的定义一致，接受 `id` 作为参数，返回值的键名为 `message`。
 - [NapCatQQ](https://github.com/NapNeko/NapCatQQ/blob/main/src/onebot/action/go-cqhttp/GetForwardMsg.ts)、[LLOneBot](https://github.com/LLOneBot/LLOneBot/blob/main/src/onebot11/action/go-cqhttp/GetForwardMsg.ts) 同时接受两个版本的参数，但返回值的键名恒为 `messages`。
 - [tanebi](https://github.com/tanebijs/tanebi/blob/main/packages/app/src/action/message/get_forward_msg.ts) 同时接受两个版本的参数，并且根据参数名来判断使用哪个版本的返回键名。
+
+## 🔵 `send_group_forward_msg`
+
+发送群聊合并转发消息。
+
+### 参数
+
+| 键名     | 类型    | 描述                                  |
+| -------- | ------- | ------------------------------------- |
+| group_id | number  | 接收消息的群号                        |
+| messages | message | 消息内容，每个消息段必须 type 为 node |
+
+### 响应数据
+
+| 键名       | 类型   | 描述            |
+| ---------- | ------ | --------------- |
+| message_id | number | 消息 ID         |
+| forward_id | string | 合并转发资源 ID |
+
+## 🔵 `send_private_forward_msg`
+
+发送私聊合并转发消息。
+
+### 参数
+
+| 键名     | 类型    | 描述                                  |
+| -------- | ------- | ------------------------------------- |
+| user_id  | number  | 接收消息的用户 QQ 号                  |
+| messages | message | 消息内容，每个消息段必须 type 为 node |
+
+### 响应数据
+
+| 键名       | 类型   | 描述            |
+| ---------- | ------ | --------------- |
+| message_id | number | 消息 ID         |
+| forward_id | string | 合并转发资源 ID |
+
+## 🟡 `send_forward_msg`
+
+这是一个扩展 API，在不同协议端的实现不同：
+
+- [Lagrange.OneBot](https://lagrange-onebot.apifox.cn/236981861e0) 将其实现为**构造合并转发消息**，参数如下：
+
+  | 键名     | 类型    | 描述                                  |
+  | -------- | ------- | ------------------------------------- |
+  | messages | message | 消息内容，每个消息段必须 type 为 node |
+
+  返回值是一个字符串（而非 JSON object），为合并转发资源 ID，可直接用于发送，但只能用于向群聊发送合并转发消息。
+
+- [NapCatQQ](https://napcat.apifox.cn/226659136e0) 将其实现为**发送合并转发消息**，相较于 [`send_group_forward_msg`](#🔵-send-group-forward-msg) 和 [`send_private_forward_msg`](#🔵-send-private-forward-msg) 多出了一些可配置的参数，具体如下：
+
+  | 键名     | 类型    | 描述                                                                          |
+  | -------- | ------- | ----------------------------------------------------------------------------- |
+  | user_id  | number  | 接收消息的用户 QQ 号，和 group_id 二选一                                      |
+  | group_id | number  | 接收消息的群号，和 user_id 二选一                                             |
+  | messages | message | 消息内容，每个消息段必须 type 为 node                                         |
+  | prompt   | string  | 收到消息，显示在文字预览的提示文本，例如 "[聊天记录]"                         |
+  | source   | string  | 合并转发的标题，例如 "群聊的聊天记录"                                         |
+  | news     | array   | 合并转发的内容预览，格式为 `{ text: string }` 的数组，例如 "某人: [动画表情]" |
+  | summary  | string  | 合并转发的脚注，例如 "查看 10 条转发消息"                                     |
+
+  返回值同 [`send_msg`](#🟢-send-msg)。
+
+- [LLOneBot](https://github.com/LLOneBot/LLOneBot/blob/main/src/onebot11/action/go-cqhttp/SendForwardMsg.ts) 将其实现为**发送合并转发消息**，参数如下：
+
+  | 键名         | 类型    | 描述                                  |
+  | ------------ | ------- | ------------------------------------- |
+  | message_type | string  | 消息类型，可能值：`private`、`group`  |
+  | user_id      | number  | 接收消息的用户 QQ 号                  |
+  | group_id     | number  | 接收消息的群号                        |
+  | message      | message | 消息内容，每个消息段必须 type 为 node |
+  | messages     | message | 定义和 message 相同，二选一 |
+
+  参数与 [`send_msg`](#🟢-send-msg) 接近，但 `message` 的每个消息段必须 type 为 node；此外，也可以用 `messages` 作为传入消息，`messages` 的每个消息段同样必须 type 为 node。
+
+  返回值与 [`send_group_forward_msg`](#🔵-send-group-forward-msg)、[`send_private_forward_msg`](#🔵-send-private-forward-msg) 相同。
+
+- [tanebi](https://github.com/tanebijs/tanebi/blob/main/packages/app/src/action/message/send_forward_msg.ts) 将其实现为**发送合并转发消息**，参数与 LLOneBot 的实现接近，区别是只接受 `messages` 作为传入消息，每个消息段同样必须 type 为 node。
+
+  返回值与 [`send_group_forward_msg`](#🔵-send-group-forward-msg)、[`send_private_forward_msg`](#🔵-send-private-forward-msg) 相同。
