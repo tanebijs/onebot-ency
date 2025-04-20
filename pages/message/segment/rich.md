@@ -34,9 +34,10 @@
 - [表情 CQ 码 ID 表](https://github.com/kyubotics/coolq-http-api/wiki/%E8%A1%A8%E6%83%85-CQ-%E7%A0%81-ID-%E8%A1%A8)
 - [Koishi QFace](https://koishi.js.org/QFace/#/qqnt)
 
-[Lagrange.OneBot](https://github.com/LagrangeDev/Lagrange.Core/blob/946f845f1fe394fbe38c2db70d3b20304142501e/Lagrange.OneBot/Message/Entity/FaceSegment.cs#L14) 的实现中包含扩展字段 `large` (boolean)，表示是否为“大表情”。这一字段适用于 QQ 的“超级表情”分类，当这一字段为 `true` 时，这一表情作为大表情发送；当这一字段为 `false` 时，这一表情作为小表情发送，会出现在文本框中。
+以下是一些协议端实现的细节：
 
-[NapCatQQ](https://github.com/NapNeko/NapCatQQ/blob/c509a01d7d5fbbf3c20bac2f7d59a2637902320f/src/onebot/types/message.ts#L164) 的实现中包含扩展字段 `resultId` (string) 和 `chainCount` (number)，这两个字段用于“接龙表情”，这是 2024 年年初 QQ 新增的功能。`resultId` 表示接龙表情的不同变种，`chainCount` 表示接龙表情到这条消息为止的接龙数量。
+- [Lagrange.OneBot](https://github.com/LagrangeDev/Lagrange.Core/blob/946f845f1fe394fbe38c2db70d3b20304142501e/Lagrange.OneBot/Message/Entity/FaceSegment.cs#L14) 的实现中包含扩展字段 `large` (boolean)，表示是否为“大表情”。这一字段适用于 QQ 的“超级表情”分类，当这一字段为 `true` 时，这一表情作为大表情发送；当这一字段为 `false` 时，这一表情作为小表情发送，会出现在文本框中。
+- [NapCatQQ](https://github.com/NapNeko/NapCatQQ/blob/c509a01d7d5fbbf3c20bac2f7d59a2637902320f/src/onebot/types/message.ts#L164) 的实现中包含扩展字段 `resultId` (string) 和 `chainCount` (number)，这两个字段用于“接龙表情”，这是 2024 年年初 QQ 新增的功能。`resultId` 表示接龙表情的不同变种，`chainCount` 表示接龙表情到这条消息为止的接龙数量。
 
 ## `at`
 
@@ -54,9 +55,8 @@
 
 ### 说明
 
-[go-cqhttp](https://docs.go-cqhttp.org/cqcode/#%E6%9F%90%E4%BA%BA) 的实现中包含扩展字段 `name` (string)，仅在发送时使用，表示如果找不到 `qq` 对应的 QQ 号，则使用这个字段作为 at 的名称。
-
-Lagrange.OneBot、NapCatQQ、LLOneBot、tanebi 不约而同地支持了这个字段。
+- [go-cqhttp](https://docs.go-cqhttp.org/cqcode/#%E6%9F%90%E4%BA%BA) 的实现中包含扩展字段 `name` (string)，仅在发送时使用，表示如果找不到 `qq` 对应的 QQ 号，则使用这个字段作为 at 的名称。
+- Lagrange.OneBot、NapCatQQ、LLOneBot、tanebi 不约而同地支持了这个字段。
 
 ## `reply`
 
