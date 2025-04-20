@@ -27,6 +27,7 @@ export default defineConfig({
         link: '/message/',
         items: [
           { text: '富文本消息段', link: '/message/segment/rich' },
+          { text: '媒体消息段', link: '/message/segment/media' },
           { text: '消息 ID', link: '/message/id' },
         ]
       }
