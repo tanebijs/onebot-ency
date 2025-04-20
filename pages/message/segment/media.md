@@ -106,8 +106,9 @@ go-cqhttp 对于 `subType` 的解释如下：
 
 NTQQ 只支持发送 Silk 格式的语音，而这一格式通常不易于直接使用，往往需要工具进行转换。各协议端使用的方案如下：
 
-- [go-cqhttp](https://github.com/Mrs4s/go-cqhttp/blob/a5923f179b360331786a6509eb33481e775a7bd1/modules/silk/codec.go#L34)：依赖 ffmpeg。
+- [go-cqhttp](https://github.com/Mrs4s/go-cqhttp/blob/a5923f179b360331786a6509eb33481e775a7bd1/modules/silk/codec.go#L34)、[NapCatQQ](https://github.com/NapNeko/NapCatQQ/blob/88b86611a31318686be8e15b65ca19d99768d24d/src/common/audio.ts#L38)、[LLOneBot](https://github.com/LLOneBot/LLOneBot/blob/2f4e5052d90f6fec03c65e745266ce6ec312d108/src/common/utils/audio.ts#L55)：依赖 ffmpeg。
 - [Lagrange.OneBot](https://github.com/LagrangeDev/Lagrange.Core/blob/master/Lagrange.OneBot/Message/Entity/RecordSegment.cs)：依赖 [Konata.Codec](https://github.com/KonataDev/Konata.Codec)。
+- [tanebi](https://github.com/tanebijs/tanebi/blob/main/packages/app/src/common/silk.ts)：依赖 [NTSilk](https://github.com/ntsilk/ntsilk)。
 
 ## `video`
 
