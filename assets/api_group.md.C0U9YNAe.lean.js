@@ -1,0 +1,1 @@
+import{_ as e,c as a,o as d,ae as r}from"./chunks/framework.CgMrDesg.js";const c=JSON.parse('{"title":"群聊 API","description":"","frontmatter":{},"headers":[],"relativePath":"api/group.md","filePath":"api/group.md"}'),o={name:"api/group.md"};function h(i,t,n,l,s,b){return d(),a("div",null,t[0]||(t[0]=[r("",78)]))}const p=e(o,[["render",h]]);export{c as __pageData,p as default};
