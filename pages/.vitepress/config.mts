@@ -20,6 +20,7 @@ export default defineConfig({
         items: [
           { text: '分类标准', link: '/api/classify' },
           { text: '消息 API', link: '/api/message' },
+          { text: '群聊 API', link: '/api/group' },
         ]
       },
       {
