@@ -65,7 +65,6 @@ OneBot 11 标准规定，当 message_type 未传入时，则根据 user_id 和 g
 - [go-cqhttp](https://github.com/Mrs4s/go-cqhttp/blob/a5923f179b360331786a6509eb33481e775a7bd1/coolq/api.go#L701) 先判断 message_type 是否为 group，如果是则按群聊处理；否则判断 user_id 是否存在，若存在则按私聊处理；若冲突，可能会出现未定义的行为。
 - [Lagrange.OneBot](https://github.com/LagrangeDev/Lagrange.Core/blob/2ab0c9213fd9ca7155ba5b88376160832bbaa977/Lagrange.OneBot/Core/Operation/Message/MessageCommon.cs#L65) 先判断 message_type 是否为 private，如果是则按私聊处理；否则判断 group_id 是否存在，若存在则按群聊处理；若冲突，可能会出现未定义的行为。
 - [NapCatQQ](https://github.com/NapNeko/NapCatQQ/blob/cc30b51d58233db02b48862ecca2c1aa24ce1535/src/onebot/action/msg/SendMsg.ts#L39) 和 [LLOneBot](https://github.com/LLOneBot/LLOneBot/blob/f1af0d3a3db7031b82717ac44c892cf7656bcabe/src/onebot11/helper/createMessage.ts#L307) 会判断 message_type 和 user_id / group_id 的对应关系是否存在冲突，若存在冲突则返回错误；否则按 user_id 和 group_id 的存在性来判断消息类型。
-- [tanebi](https://github.com/tanebijs/tanebi/blob/98c1b36ec200fdb27a7f5d05c7adebcfaf741185/packages/app/src/action/message/send_msg.ts#L10) 不校验冲突，直接按 user_id 和 group_id 的存在性来判断消息类型，若二者均不存在则报错。
 
 ## 🟢 `delete_msg`
 
@@ -105,7 +104,7 @@ OneBot 11 标准规定，当 message_type 未传入时，则根据 user_id 和 g
 OneBot 11 标准制定时 “真实” ID 的原本含义已经不得而知，各个协议端的实现细节如下：
 
 - [go-cqhttp](https://github.com/Mrs4s/go-cqhttp/blob/a5923f179b360331786a6509eb33481e775a7bd1/coolq/api.go#L1689) 和 [LLOneBot](https://github.com/LLOneBot/LLOneBot/blob/f1af0d3a3db7031b82717ac44c892cf7656bcabe/src/onebot11/action/msg/GetMsg.ts#L33) 将消息的 seq 作为 real_id 返回。
-- [Lagrange.OneBot](https://github.com/LagrangeDev/Lagrange.Core/blob/2ab0c9213fd9ca7155ba5b88376160832bbaa977/Lagrange.OneBot/Core/Entity/Action/Response/OneBotGetMessageResponse.cs#L15)、[NapCatQQ](https://github.com/NapNeko/NapCatQQ/blob/cc30b51d58233db02b48862ecca2c1aa24ce1535/src/onebot/action/msg/GetMsg.ts#L44) 和 [tanebi](https://github.com/tanebijs/tanebi/blob/98c1b36ec200fdb27a7f5d05c7adebcfaf741185/packages/app/src/action/message/get_msg.ts#L25) 直接将 message_id 作为 real_id 返回。
+- [Lagrange.OneBot](https://github.com/LagrangeDev/Lagrange.Core/blob/2ab0c9213fd9ca7155ba5b88376160832bbaa977/Lagrange.OneBot/Core/Entity/Action/Response/OneBotGetMessageResponse.cs#L15)、[NapCatQQ](https://github.com/NapNeko/NapCatQQ/blob/cc30b51d58233db02b48862ecca2c1aa24ce1535/src/onebot/action/msg/GetMsg.ts#L44) 直接将 message_id 作为 real_id 返回。
 
 ## 🟢 `get_forward_msg`
 
@@ -129,7 +128,6 @@ OneBot 11 标准制定时 “真实” ID 的原本含义已经不得而知，�
 
 - Lagrange.OneBot ([Payload](https://github.com/LagrangeDev/Lagrange.Core/blob/master/Lagrange.OneBot/Core/Entity/Action/OneBotGetForwardMsg.cs), [Response](https://github.com/LagrangeDev/Lagrange.Core/blob/master/Lagrange.OneBot/Core/Entity/Action/OneBotGetForwardMsg.cs)) 的实现与 OneBot 11 的定义一致，接受 `id` 作为参数，返回值的键名为 `message`。
 - [NapCatQQ](https://github.com/NapNeko/NapCatQQ/blob/main/src/onebot/action/go-cqhttp/GetForwardMsg.ts)、[LLOneBot](https://github.com/LLOneBot/LLOneBot/blob/main/src/onebot11/action/go-cqhttp/GetForwardMsg.ts) 同时接受两个版本的参数，但返回值的键名恒为 `messages`。
-- [tanebi](https://github.com/tanebijs/tanebi/blob/main/packages/app/src/action/message/get_forward_msg.ts) 同时接受两个版本的参数，并且根据参数名来判断使用哪个版本的返回键名。
 
 ## 🔵 `send_group_forward_msg`
 
@@ -181,8 +179,6 @@ OneBot 11 标准制定时 “真实” ID 的原本含义已经不得而知，�
   | messages     | message | 消息内容，每个消息段必须 type 为 node |
 
   返回值与 [`send_group_forward_msg`](#🔵-send-group-forward-msg)、[`send_private_forward_msg`](#🔵-send-private-forward-msg) 相同。
-
-- [tanebi](https://github.com/tanebijs/tanebi/blob/main/packages/app/src/action/message/send_forward_msg.ts) 的实现与 go-cqhttp 相同。
 
 - [Lagrange.OneBot](https://lagrange-onebot.apifox.cn/236981861e0) 将其实现为**构造合并转发消息**，参数如下：
 

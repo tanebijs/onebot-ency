@@ -69,7 +69,3 @@ createUniqueMsgId(peer: Peer, msgId: string) {
 ### [LLOneBot](https://github.com/LLOneBot/LLOneBot/blob/f1af0d3a3db7031b82717ac44c892cf7656bcabe/src/main/store.ts#L64)
 
 LLOneBot 使用了 NapCatQQ 的逻辑。
-
-### [tanebi](https://github.com/tanebijs/tanebi/blob/98c1b36ec200fdb27a7f5d05c7adebcfaf741185/packages/app/src/storage/database/schema.ts#L4)
-
-tanebi 完全没有计算消息 ID，而是在存储的时候设置了自增字段，将其作为消息 ID。

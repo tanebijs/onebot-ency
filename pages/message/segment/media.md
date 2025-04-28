@@ -23,7 +23,7 @@
 
 在实际使用中，用户并不一定只通过 `file` 字段来传递文件路径，可能会使用其他字段来传递文件路径，部分协议端的适配如下：
 
-- [NapCatQQ](https://github.com/NapNeko/NapCatQQ/blob/35f24eb8061c4934a3d9b6c5c335f5424516df9a/src/onebot/api/msg.ts#L1057) 和 [tanebi](https://github.com/tanebijs/tanebi/blob/1aa0ebe39a9e99a6874f90fa6ecb6a9211378577/packages/app/src/common/download.ts#L44) 检测了 `file`、`url` 和 `path` 三个字段。
+- [NapCatQQ](https://github.com/NapNeko/NapCatQQ/blob/35f24eb8061c4934a3d9b6c5c335f5424516df9a/src/onebot/api/msg.ts#L1057) 检测了 `file`、`url` 和 `path` 三个字段。
 - [LLOneBot](https://github.com/LLOneBot/LLOneBot/blob/2f4e5052d90f6fec03c65e745266ce6ec312d108/src/onebot11/helper/createMessage.ts#L326) 检测了 `file` 和 `url` 两个字段。
 
 ### 接收参数
@@ -87,7 +87,7 @@ go-cqhttp 对于 `subType` 的解释如下：
 
 其他协议端也跟进实现了 `subType` 字段。
 
-此外，Lagrange.OneBot、NapCatQQ、LLOneBot、tanebi 都不约而同地实现了 `summary` (string) 字段，该字段表示收到图片消息后显示的预览文本，对于 `subType` 为 0 默认显示为 `[图片]`，对于 `subType` 为 1 默认显示为 `[动画表情]`。
+此外，Lagrange.OneBot、NapCatQQ、LLOneBot 都不约而同地实现了 `summary` (string) 字段，该字段表示收到图片消息后显示的预览文本，对于 `subType` 为 0 默认显示为 `[图片]`，对于 `subType` 为 1 默认显示为 `[动画表情]`。
 
 ## `record`
 
@@ -109,7 +109,6 @@ NTQQ 只支持发送 Silk 格式的语音，而这一格式通常不易于直接
 
 - [go-cqhttp](https://github.com/Mrs4s/go-cqhttp/blob/a5923f179b360331786a6509eb33481e775a7bd1/modules/silk/codec.go#L34)、[NapCatQQ](https://github.com/NapNeko/NapCatQQ/blob/88b86611a31318686be8e15b65ca19d99768d24d/src/common/audio.ts#L38)、[LLOneBot](https://github.com/LLOneBot/LLOneBot/blob/2f4e5052d90f6fec03c65e745266ce6ec312d108/src/common/utils/audio.ts#L55)：依赖 ffmpeg。
 - [Lagrange.OneBot](https://github.com/LagrangeDev/Lagrange.Core/blob/master/Lagrange.OneBot/Message/Entity/RecordSegment.cs)：依赖 [Konata.Codec](https://github.com/KonataDev/Konata.Codec)。
-- [tanebi](https://github.com/tanebijs/tanebi/blob/main/packages/app/src/common/silk.ts)：依赖 [NTSilk](https://github.com/ntsilk/ntsilk)。
 
 ## `video`
 
@@ -131,7 +130,7 @@ NTQQ 只支持发送 Silk 格式的语音，而这一格式通常不易于直接
 
 本消息段在协议端的支持情况不佳。
 
-- go-cqhttp、tanebi 不支持魔法表情。
+- go-cqhttp 不支持魔法表情。
 - [NapCatQQ](https://github.com/NapNeko/NapCatQQ/blob/88b86611a31318686be8e15b65ca19d99768d24d/src/onebot/types/message.ts#L221) 和 [LLOneBot](https://github.com/LLOneBot/LLOneBot/blob/2f4e5052d90f6fec03c65e745266ce6ec312d108/src/onebot11/types.ts#L157) 的实现支持 `result` (number) 字段，表示结果。但这个字段只在接收时有效，发送时提供该字段并不能控制结果。
 
 ## `share`
@@ -164,7 +163,7 @@ NTQQ 只支持发送 Silk 格式的语音，而这一格式通常不易于直接
 
 ### 说明
 
-Lagrange.OneBot 和 tanebi 不支持该消息段。
+Lagrange.OneBot 不支持该消息段。
 
 ## `location`
 

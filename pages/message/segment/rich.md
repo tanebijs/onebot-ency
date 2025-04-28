@@ -56,7 +56,7 @@
 ### 说明
 
 - [go-cqhttp](https://docs.go-cqhttp.org/cqcode/#%E6%9F%90%E4%BA%BA) 的实现中包含扩展字段 `name` (string)，仅在发送时使用，表示如果找不到 `qq` 对应的 QQ 号，则使用这个字段作为 at 的名称。
-- Lagrange.OneBot、NapCatQQ、LLOneBot、tanebi 不约而同地支持了这个字段。
+- Lagrange.OneBot、NapCatQQ、LLOneBot 不约而同地支持了这个字段。
 
 ## `reply`
 

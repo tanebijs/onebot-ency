@@ -2,7 +2,7 @@
 
 ## 你是谁？凭什么由你来定义 OneBot？
 
-我是尚未完善的一个协议端——[tanebi](https://github.com/tanebijs/tanebi) 的开发者，同时也或多或少参与过 [Lagrange.Core](https://github.com/LagrangeDev/Lagrange.Core) 和 [NapCatQQ](https://github.com/NapNeko/NapCatQQ) 的开发。为了编写 tanebi 的 [OneBot 11 实现部分](https://github.com/tanebijs/tanebi/tree/main/packages/app)，我参考了[OneBot 11 的官方文档](https://11.onebot.dev/)、[go-cqhttp 帮助中心](https://docs.go-cqhttp.org/)，以及 [Lagrange.OneBot](https://lagrange-onebot.apifox.cn/) 和 [NapCatQQ](https://napcat.apifox.cn/) 在 Apifox 发布的文档。
+我曾经用 TypeScript 开发一个协议端——[tanebi](https://github.com/tanebijs/tanebi)，同时也或多或少参与过 [Lagrange.Core](https://github.com/LagrangeDev/Lagrange.Core) 和 [NapCatQQ](https://github.com/NapNeko/NapCatQQ) 的开发。为了编写 tanebi 的 [OneBot 11 实现部分](https://github.com/tanebijs/tanebi/tree/main/packages/app)，我参考了[OneBot 11 的官方文档](https://11.onebot.dev/)、[go-cqhttp 帮助中心](https://docs.go-cqhttp.org/)，以及 [Lagrange.OneBot](https://lagrange-onebot.apifox.cn/) 和 [NapCatQQ](https://napcat.apifox.cn/) 在 Apifox 发布的文档。
 
 没有人能真正定义 OneBot，包括我自己，抑或是每个人都是 OneBot 的定义者。OneBot 是一个开放的协议，任何人都可以实现它。我们能做的，也只是将已有的实现进行整理和剖析。
 
