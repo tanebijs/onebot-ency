@@ -1,0 +1,1 @@
+import{_ as i,c as a,o as t,ae as h}from"./chunks/framework.CgMrDesg.js";const E=JSON.parse('{"title":"消息 ID","description":"","frontmatter":{},"headers":[],"relativePath":"message/id.md","filePath":"message/id.md"}'),e={name:"message/id.md"};function n(l,s,p,k,r,d){return t(),a("div",null,s[0]||(s[0]=[h("",24)]))}const o=i(e,[["render",n]]);export{E as __pageData,o as default};
